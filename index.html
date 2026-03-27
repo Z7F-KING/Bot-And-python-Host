@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+<title>Bot Host Login</title>
 
+<!-- ربط CSS -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -14,14 +15,22 @@
 <div class="login-box">
   <h1><i class="fa-solid fa-robot"></i> Bot Host</h1>
 
+  <!-- حق المستخدم -->
   <input id="username" placeholder="Username">
+
+  <!-- حق كلمة المرور -->
   <input id="password" type="password" placeholder="Password">
 
+  <!-- زر تسجيل الدخول -->
   <button onclick="login()">
     <i class="fa-solid fa-right-to-bracket"></i> Login
   </button>
+
+  <!-- رابط تسجيل مستخدم جديد (اختياري) -->
+  <p>Don't have an account? <a href="register.html">Register</a></p>
 </div>
 
+<!-- ربط JS -->
 <script src="js/app.js"></script>
 </body>
 </html>
