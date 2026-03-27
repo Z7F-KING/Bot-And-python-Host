@@ -5,28 +5,37 @@ body {
   color: white;
 }
 
-.login-box {
-  width: 90%;
-  max-width: 350px;
-  margin: 100px auto;
+header {
+  background: #020617;
+  padding: 15px;
   text-align: center;
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px #000;
 }
 
-input {
+.panel {
+  padding: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
   width: 90%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
+  max-width: 350px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.card input {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
   border: none;
 }
 
-button {
-  padding: 12px;
-  border-radius: 10px;
+.card button {
+  padding: 10px;
+  border-radius: 8px;
   border: none;
   background: #22c55e;
   color: white;
@@ -34,11 +43,32 @@ button {
   width: 60%;
 }
 
-button:hover {
+.card button:hover {
   background: #16a34a;
 }
 
-p {
-  margin-top: 15px;
-  font-size: 0.9em;
+.bots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bot {
+  background: #334155;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 200px;
+  transition: 0.3s;
+}
+
+.bot:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .bot {
+    width: 95%;
+  }
 }
