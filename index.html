@@ -1,32 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bot Dashboard</title>
-
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Python Runner</title>
+    <style>
+        body { display: flex; font-family: sans-serif; margin: 0; background: #1e1e1e; color: white; }
+        .sidebar { width: 200px; background: #252526; height: 100vh; padding: 20px; border-left: 1px solid #333; }
+        .content { flex: 1; padding: 20px; }
+        textarea { width: 100%; height: 300px; background: #2d2d2d; color: #9cdcfe; border: 1px solid #444; padding: 10px; font-family: monospace; }
+        .console { background: black; color: #00ff00; padding: 15px; height: 200px; overflow-y: auto; border: 1px solid #555; margin-top: 20px; white-space: pre-wrap; }
+        .menu-item { cursor: pointer; padding: 10px; border-bottom: 1px solid #333; }
+        .menu-item:hover { background: #37373d; }
+        button { background: #0e639c; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-top: 10px; }
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1><i class="fa-solid fa-server"></i> Bot Dashboard</h1>
-</header>
-
-<div class="panel">
-
-  <div class="card">
-    <h2>➕ Add Bot</h2>
-    <input id="name" placeholder="Bot Name">
-    <input id="token" placeholder="Bot Token">
-    <button onclick="addBot()"><i class="fa-solid fa-plus"></i> Add Bot</button>
-  </div>
-
-  <div id="bots" class="bots"></div>
-
+<div class="sidebar">
+    <h3>القائمة</h3>
+    <div class="menu-item" onclick="showPage('main')">📄 main.py</div>
+    <div class="menu-item" onclick="showPage('console-tab')">💻 Console</div>
 </div>
 
-<script src="js/dashboard.js"></script>
+<div class="content">
+    <div id="main-page">
+        <h2>صفحة الأداة (main.py)</h2>
+        <p>الصق كود بايثون هنا:</p>
+        <textarea id="code-input" placeholder="import os..."></textarea>
+        <br>
+        <button onclick="executeCode()">تشغيل الأداة ▶️</button>
+    </div>
+
+    <div id="console-page" class="hidden">
+        <h2>الكونسول (Console)</h2>
+        <div id="console-output" class="console">في انتظار تشغيل الأداة...</div>
+    </div>
+</div>
+
+<script>
+    function showPage(page) {
+        document.getElementById('main-page').classList.toggle('hidden', page !== 'main');
+        document.getElementById('console-page').classList.toggle('hidden', page !== 'console-tab');
+    }
+
+    async function executeCode() {
+        const code = document.getElementById('code-input').value;
+        const consoleOutput = document.getElementById('console-output');
+        
+        consoleOutput.innerText = "جاري التشغيل...";
+        showPage('console-tab');
+
+        const response = await fetch('/run', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({code: code})
+        });
+        
+        const data = await response.json();
+        consoleOutput.innerText = data.output;
+    }
+</script>
+
 </body>
 </html>
